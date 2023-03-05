@@ -18,7 +18,7 @@ def register(request):
             return redirect('login')
 
     context = {'form': form}
-    return render(request, 'authorization/register.html')
+    return render(request, 'authorization/register.html',context)
 
 
 def login(request):
