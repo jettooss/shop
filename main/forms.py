@@ -10,3 +10,13 @@ class Main_form(forms.ModelForm):
     class Meta:
         model = product_main
         fields = ['product', "image"]
+class Main_form1(forms.ModelForm):
+
+    class Meta:
+        model = Product_category
+        fields = "__all__"
+        # fields = (
+        #     'bio',
+        #     'phone',
+        #     'gender',
+        # )

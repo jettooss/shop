@@ -12,7 +12,10 @@ from django.contrib import messages
 def main(request):
 
     context = {
-        'form': product_main.objects.all()}
+        'form': product_main.objects.all(),
+         'form1':Product_category.objects.all(),
+        'form2': Label_Product.objects.all()
+     }
     return render(request, 'main/main.html',context)
 
 
@@ -34,3 +37,14 @@ def create(request):
 
 
     return render(request, 'main/create.html', {'u_form':u_form})
+
+def show_post(request, post_slug):
+
+    post = get_object_or_404(Label_Product, slug=post_slug)
+    s = post.name
+    product= Product.objects.all().filter(category=post)
+    context={
+        "product":product
+    }
+
+    return render(request, 'main/product.html' ,context)

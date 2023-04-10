@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% include 'main/basis.html' %}
+
+
+<main>
+<div class="album py-5 bg-light">
+
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          {% for product in product %}
+        <div class="col">
+          <div class="card shadow-sm">
+             <img src="{{product.image.url}}" class=" img-thumbnail" alt="...">
+            <div class="card-body">
+                 <h5 class="text-center fw-bolder">{{product.name}}</h5>
+              <div class="d-flex justify-content-between align-items-star-">
+                              <p class="card-muted-star">{% if product.xs > 0 %}
+    <div>XS</div>  {% endif %} {% if product.s > 0 %}
+    <div>S</div>  {% endif %}
+     {% if product.m > 0 %}<div>M</div>  {% endif %}
+     {% if product.l > 0 %}<div>L</div>  {% endif %}
+        {% if product.xl > 0 %}<div>XL</div>  {% endif %}
+
+
+
+                  </p>
+
+              </div>
+        <p class="text-center fw-bolder"><small class="text">{{product.price}} РУБ</small></p>
+                <div class="btn-group">
+{#          <p><a class="btn btn-lg btn-primary" href="{% url 'show_post' post_id=p.complex %}" >Купить</a></p>#}
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          {% endfor %}
+      </div>
+    </div>
+
+    </div>
+
+</main>
+
+
+</body>
+</html>
