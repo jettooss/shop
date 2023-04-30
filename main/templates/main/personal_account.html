@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head><title>Личный кабинет</title> <!-- Подключаем Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"><a class="navbar-brand" href="#">Магазин</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+
+
+                <li class="nav-item"><a class="nav-link" href="{% url 'main' %}">Назад</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main class="container mt-5">
+    <section><h2>Данные профиля</h2>
+        <form>
+            <div class="form-group row"><label for="name" class="col-sm-2 col-form-label">Имя:</label>
+                <div class="col-sm-10"><input type="text" class="form-control" id="name" name="name" value="Иван"
+                                              required></div>
+            </div>
+            <div class="form-group row"><label for="surname" class="col-sm-2 col-form-label">Фамилия:</label>
+                <div class="col-sm-10"><input type="text" class="form-control" id="surname" name="surname"
+                                              value="Иванов" required></div>
+            </div>
+            <div class="form-group row"><label for="email" class="col-sm-2 col-form-label">Email:</label>
+                <div class="col-sm-10"><input type="email" class="form-control" id="email" name="email"
+                                              value="ivanov@mail.ru" required></div>
+            </div>
+            <div class="form-group row"><label for="phone" class="col-sm-2 col-form-label">Телефон:</label>
+                <div class="col-sm-10"><input type="tel" class="form-control" id="phone" name="phone"
+                                              value="+7 999 1234567" required></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <section><h2>Корзина</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Номер заказа</th>
+                <th>Дата заказа</th>
+                <th>Статус заказа</th>
+                <th>Сумма заказа</th>
+                <th>Наименование товара	</th>
+                <th>Действия</th>
+
+            </tr>
+            </thead>
+            <tbody>
+                            {% for product in product %}
+
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.created }}</td>
+                <td>{{ product.get_status_display }}</td>
+                <td>{{ product.price}}</td>
+                <td>{{ product.name}}</td>
+                <td><a href="{% url 'delete_order'  product.id  %}">Удалить</a></td>
+
+            </tr>
+                           {% endfor %}
+
+            </tbody>
+        </table>
+        <p>Общая стоимость товаров:{{total_price}}.</p>
+        <p><a href="{% url 'checkout' %}">Оформить заказ</a></p>
+    </section>
+
+
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

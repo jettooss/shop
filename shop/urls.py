@@ -4,15 +4,18 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from authorization import views as user_views
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('main.urls')),
+extra_patterns = [
     path('login/', user_views.login, name='login'),
     path('register/', user_views.register, name='register'),
 ]
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('main.urls')),
+
+    path('authorization/', include(extra_patterns)),
+
+    path('__debug__/', include('debug_toolbar.urls')),
+]
 
 
 if settings.DEBUG:

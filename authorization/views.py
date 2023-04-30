@@ -30,7 +30,7 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             dj_login(request, user)
-            return redirect('bank')
+            return redirect('main')
         else:
             messages.info(request, f'что не так,{user}')
 
